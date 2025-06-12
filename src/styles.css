@@ -1,0 +1,159 @@
+@font-face {
+  font-family: "Montserrat";
+  src:
+    url("assets/fonts/Montserrat-Regular.woff2") format("woff2"),
+    url("assets/fonts/Montserrat-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #ddd;
+  color: gray;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 40px 0 30px;
+  text-align: center;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: .5rem .1rem;
+  width: 400px;
+  margin: auto;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+label {
+  grid-column: 1 / -1;
+}
+
+form > input,
+form > button {
+  font: inherit;
+  color: black;
+  height: 40px;
+}
+
+.card {
+  background-color: white;
+  width: 400px;
+  margin: 10px auto;
+  padding-bottom: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.image {
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+}
+
+.time {
+  background-color: #eee;
+  color: black;
+  width: 50px;
+  position: absolute;
+  font-weight: bold;
+  text-align: center;
+  z-index: 1;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+.image > img {
+  position: absolute;
+  /* right: 0; */
+  width: 804px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  background-color: #eee;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: auto;
+  position: relative;
+  top: -50px;
+  margin-bottom: -50px;
+}
+
+.icon > img {
+  width: 50%;
+}
+
+.info {
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.location,
+.conditions,
+.feelslike {
+  text-transform: uppercase;
+}
+
+.location {
+  margin: 25px;
+  font-weight: bold;
+}
+
+.temperature {
+  display: flex;
+  justify-content: center;
+  gap: 1ch;
+  margin: 15px 0 5px;
+}
+
+.temperature > .value {
+  font-size: 3rem;
+}
+
+.units {
+  font-size: 1.5rem;
+  align-self: center;
+}
+
+#celsius,
+#fahrenheit {
+  font: inherit;
+  background: none;
+  color: inherit;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#celsius {
+  font-weight: bold;
+}
+
+.feelslike > .value,
+.feelslike > .unit {
+  font-weight: bold;
+}
+
+.extra-info {
+  font-size: 1rem;
+  margin: 15px;
+  font-weight: bold;
+}
+
+.label {
+  font-weight: normal;
+}
+
+.extra-info > div {
+  margin: 5px;
+}

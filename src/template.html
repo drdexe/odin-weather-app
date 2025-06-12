@@ -3,9 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>Weather App</title>
 </head>
 <body>
-  
+  <h1>Weather Ninja</h1>
+  <form>
+    <label for="location">Enter a location for weather information</label>
+    <input type="search" id="location" autofocus>
+    <button type="submit">Search</button>
+  </form>
+  <div class="card">
+    <div class="image">
+      <div class="time">5 AM</div>
+      <img src="assets/images/day-night.jpg" alt="">
+    </div>
+    <div class="icon">
+      <img alt="">
+    </div>
+    <div class="info">
+      <div class="location">singapore</div>
+      <div class="conditions">PARTIALLY CLOUDY</div>
+      <div class="temperature">
+        <span class="value">28.9</span>
+        <span class="units">
+          <button id="celsius">&deg;C</button>
+          |
+          <button id="fahrenheit">&deg;F</button>
+        </span>
+      </div>
+      <div class="feelslike">FEELS LIKE <span class="value">30.0</span><span class="unit">&deg;C</span></div>
+      <div class="extra-info">
+        <div class="precipitation">
+          <span class="label">Precipitation:</span>
+          <span class="value">10</span>%
+        </div>
+        <div class="humidity">
+          <span class="label">Humidity:</span>
+          <span class="value">78</span>%
+        </div>
+        <div class="wind">
+          <span class="label">Wind:</span>
+          <span class="value">11</span> km/h
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
