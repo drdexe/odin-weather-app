@@ -14,20 +14,17 @@ const humiditySpan = document.querySelector(".humidity > .value");
 const windSpan = document.querySelector(".wind > .value");
 
 let data = null;
+let tempUnit = "C";
 
 async function getWeatherData(location) {
-  try {
-    const response = await fetch(
-      `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=YFAJNKRV8EGSL33G9R8Z2WC3Y`,
-    );
-    if (!response.ok) {
-      throw new Error(`${response.status} ${response.statusText}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
+  const response = await fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=YFAJNKRV8EGSL33G9R8Z2WC3Y`,
+  );
+  if (!response.ok) {
+    throw new Error("invalid location");
   }
+  const data = await response.json();
+  return data;
 }
 
 function getFormattedTime(datetime) {
@@ -43,6 +40,8 @@ function isDay(datetimeEpoch, sunriseEpoch, sunsetEpoch) {
 }
 
 function showTimeImage(isDay) {
+  timeImage.style.left = "";
+  timeImage.style.right = "";
   if (isDay) {
     timeImage.style.left = 0;
     timeImage.alt = "day";
@@ -91,11 +90,37 @@ function populateCard(data) {
   showWeatherIcon(data.icon);
   locationDiv.textContent = data.location;
   conditionsDiv.textContent = data.conditions;
-  temperatureSpan.textContent = data.tempC;
-  feelslikeSpan.textContent = data.feelslikeC;
+  if (tempUnit === "C") {
+    temperatureSpan.textContent = data.tempC;
+    feelslikeSpan.textContent = data.feelslikeC;
+  } else {
+    temperatureSpan.textContent = data.tempF;
+    feelslikeSpan.textContent = data.feelslikeF;
+  }
   precipitationSpan.textContent = data.precipprob;
   humiditySpan.textContent = data.humidity;
   windSpan.textContent = data.windspeed;
+}
+
+async function displayWeather(location = "singapore") {
+  try {
+    const weatherData = await getWeatherData(location);
+    data = getProcessedWeatherData(weatherData);
+    populateCard(data);
+    locationInput.setCustomValidity("");
+    locationInput.reportValidity();
+    console.log(weatherData);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+    if (error.message === "invalid location") {
+      locationInput.setCustomValidity("Invalid location!");
+      locationInput.reportValidity();
+    } else {
+      locationInput.setCustomValidity("");
+      locationInput.reportValidity();
+    }
+  }
 }
 
 function updateTempUnit(e) {
@@ -107,6 +132,7 @@ function updateTempUnit(e) {
 
   switch (e.target.id) {
     case "celsius":
+      tempUnit = "C";
       temperatureSpan.textContent = data.tempC;
       feelslikeSpan.textContent = data.feelslikeC;
 
@@ -115,6 +141,7 @@ function updateTempUnit(e) {
       feelslikeUnit.textContent = "°C";
       break;
     case "fahrenheit":
+      tempUnit = "F";
       temperatureSpan.textContent = data.tempF;
       feelslikeSpan.textContent = data.feelslikeF;
 
@@ -127,11 +154,10 @@ function updateTempUnit(e) {
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const weatherData = await getWeatherData(locationInput.value);
-  data = getProcessedWeatherData(weatherData);
-  populateCard(data);
-  console.log(weatherData);
-  console.log(data);
+  if (locationInput.value) await displayWeather(locationInput.value);
+  else await displayWeather();
 });
 
 document.querySelector(".units").addEventListener("click", updateTempUnit);
+
+window.addEventListener("DOMContentLoaded", displayWeather());
