@@ -152,7 +152,7 @@ function updateTempUnit(e) {
   }
 }
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", async e => {
   e.preventDefault();
   if (locationInput.value) await displayWeather(locationInput.value);
   else await displayWeather();
