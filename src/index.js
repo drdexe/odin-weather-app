@@ -158,6 +158,11 @@ form.addEventListener("submit", async e => {
   else await displayWeather();
 });
 
+locationInput.addEventListener("input", () => {
+  locationInput.setCustomValidity("");
+  locationInput.reportValidity();
+});
+
 document.querySelector(".units").addEventListener("click", updateTempUnit);
 
 window.addEventListener("DOMContentLoaded", displayWeather());
