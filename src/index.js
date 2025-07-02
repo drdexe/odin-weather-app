@@ -77,7 +77,7 @@ function getProcessedWeatherData(data) {
     feelslikeF: currentConditions.feelslike,
     feelslikeC: getCelsiusTemp(currentConditions.feelslike),
     humidity: currentConditions.humidity,
-    precipprob: currentConditions.precipprob,
+    precipprob: data.days[0].precipprob,
     windspeed: currentConditions.windspeed,
     conditions: currentConditions.conditions,
     icon: currentConditions.icon,
